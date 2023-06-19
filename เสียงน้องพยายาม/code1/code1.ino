@@ -19,6 +19,7 @@ char pass[] = "netnut00";
 //char pass[] = "12345679";
 
 int i = 90;
+int dist = 0;
 #define TRIG_PIN D6
 #define ECHO_PIN D7
 #define speaker D2
@@ -60,9 +61,9 @@ void loop()
   Serial.print("Ultrasonic Sensor Distance = ");
   Serial.print(dist);
   Serial.println("cm");
-  delay(200);
+  delay(300);
   
-  if (dist <= 25 && check) {
+  if (dist <= 70 && check) {
     check = !check;
     turn_on(dist);
   }
@@ -101,6 +102,12 @@ BLYNK_WRITE(V5)
     }
   }
   Serial.println("headfont");
+}
+
+BLYNK_WRITE(V7)
+{
+  check = !check;
+  turn_on(dist);
 }
 
 BLYNK_WRITE(V6)
